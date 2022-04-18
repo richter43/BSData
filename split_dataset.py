@@ -1,4 +1,4 @@
-import os , os.path, glob, shutil, json, argparse
+import os, os.path, glob, shutil, json, argparse
 import pathlib
 """
 script to sort images of dataset, depending on what you want to do.
@@ -17,14 +17,17 @@ python sort_dataset.py --split_type=train_test_split \
 
 def mogli(split_type, output_dir):
 
+
+    dataset_dir = pathlib.Path(__file__).parent.resolve()
+
     # paths
-    path_data = './data/'
-    path_label = './label/'
+    path_data = os.path.join(dataset_dir, 'data')
+    path_label = os.path.join(dataset_dir, 'label')
     image_data = 'image_data.json'
     path_data = pathlib.Path(path_data)
     path_label = pathlib.Path(path_label)
-    path_output_dir = pathlib.Path(output_dir)
-    path_image_data = pathlib.Path(image_data)
+    path_output_dir = pathlib.Path(os.path.join(dataset_dir, output_dir))
+    path_image_data = pathlib.Path(os.path.join(dataset_dir,image_data))
     data_paths_sorted = sorted(list(path_data.glob("*.jpg")))
     label_paths_sorted = sorted(list(path_label.glob("*.json")))
 
